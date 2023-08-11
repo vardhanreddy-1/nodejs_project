@@ -1,0 +1,25 @@
+name: Deploy website
+on:
+  push:
+    branches:
+      - main
+jobs:
+      Build_test:
+          runs-on: ubuntu-latset
+          steps:
+             - name: Get the code
+               uses: actions/checkout@v3
+             - name: set the env
+               uses: actions/setup-node@v3
+               with:
+                     node-version: 17
+             - name: Intsall the dependencies
+               run:  npm ci
+             - name: Lint Testing
+               run:  npm run lint
+             - name: Testing
+               run: npm run test
+             - name: Building
+               run: npm run build
+                  
+  
