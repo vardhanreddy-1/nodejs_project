@@ -38,3 +38,13 @@ jobs:
               with:
                      name: dist-files
                      path: dist
+    Deploy_job:
+        needs: [UploadArtifact]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get the artifacts
+              uses: actions/download-artifact@v3
+              with:
+                    name: dist-files
+            - name: list the files in the directory
+              run: ls 
