@@ -1,0 +1,39 @@
+name: UploadArtifact
+
+on: 
+     push:
+        branches:
+            - main
+jobs:
+    Test_Job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get the code
+              uses: actions/checkout@v3
+            - name: Set the env
+              uses: actions/setup-node@v3
+              with:
+                    node-version: 17
+            - name: Install Dependecies
+              uses: npm ci
+            - name: Lint Test
+              run: npm run lint
+            - name: Testing
+              run: npm run test
+    UploadArtifact:
+        needs: [Test_Job]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get the code
+              uses: actions/checkout@v3
+            - name: Install Dependecy
+              run: npm ci
+            - name: Build the code
+              run: npm run build
+            - name: List the items in Working directory
+              run: ls -l ${{ github.repository }}
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v3
+              with:
+                     name: dist-files
+                     path: ${{ github.repository}} dist
