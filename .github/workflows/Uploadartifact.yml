@@ -52,6 +52,6 @@ jobs:
               with:
                     name: dist-files
             - name: output filename
-              run: ${{ needs.UploadArtifact.outputs.script-output }}
+              run: echo " ${{ needs.UploadArtifact.outputs.script-output }} "
             - name: list the files in the directory
               run: ls ${{github.workspace}} 
