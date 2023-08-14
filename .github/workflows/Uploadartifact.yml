@@ -24,6 +24,8 @@ jobs:
     UploadArtifact:
         needs: [Test_Job]
         runs-on: ubuntu-latest
+        outputs:
+            script-output: ${{steps.publish.outputs.JSoutputFile}}
         steps:
             - name: Get the code
               uses: actions/checkout@v3
@@ -31,6 +33,9 @@ jobs:
               run: npm ci
             - name: Build the code
               run: npm run build
+            - name: publish JS filename
+              id: publish
+              run: find /dist/assets/*.js -type f -execdir echo ' ::set-output name=JSoutputFile::{}' ';'
             - name: List the items in Working directory
               run: ls  ${{ github.workspace }}
             - name: Upload Artifact
@@ -46,5 +51,7 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                     name: dist-files
+            - name: output filename
+              run: ${{ needs.UploadArtifact.outputs.script-output }}
             - name: list the files in the directory
               run: ls ${{github.workspace}} 
