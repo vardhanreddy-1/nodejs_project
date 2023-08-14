@@ -47,4 +47,4 @@ jobs:
               with:
                     name: dist-files
             - name: list the files in the directory
-              run: ls 
+              run: ls ${{github.workspace}} 
