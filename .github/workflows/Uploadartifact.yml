@@ -1,9 +1,10 @@
 name: UploadArtifact
 
 on: 
-     push:
+    push:
         branches:
             - main
+    workflow_dispatch:
 jobs:
     Test_Job:
         runs-on: ubuntu-latest
