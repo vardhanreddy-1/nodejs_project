@@ -16,7 +16,7 @@ jobs:
               with:
                     node-version: 17
             - name: Install Dependecies
-              uses: npm ci
+              run: npm ci
             - name: Lint Test
               run: npm run lint
             - name: Testing
