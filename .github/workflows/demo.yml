@@ -30,5 +30,6 @@ jobs:
             uses: actions/upload-artifact@v3
             with:
                   name: myArtifact
-                  path: ${{ github.workdpace }} /build/app/outputs/myArtifact
+                  path: | 
+                    ${{ github.workdpace }} /build/app/outputs/myArtifact
       
