@@ -29,7 +29,9 @@ jobs:
           - name: upload artifact
             uses: actions/upload-artifact@v3
             with:
-                  name: myArtifact
-                  path: | 
-                    ${{ github.workdpace }} build/app/outputs/myArtifact
+              name: MyArtifact
+              path: build/app/outputs/myArtifact
       
+
+
+                
