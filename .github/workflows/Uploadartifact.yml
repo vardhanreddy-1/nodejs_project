@@ -32,7 +32,7 @@ jobs:
             - name: Build the code
               run: npm run build
             - name: List the items in Working directory
-              run: ls -l ${{ github.repository }}
+              run: ls  ${{ github.repository }}
             - name: Upload Artifact
               uses: actions/upload-artifact@v3
               with:
