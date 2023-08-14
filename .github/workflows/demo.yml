@@ -29,8 +29,8 @@ jobs:
           - name: upload artifact
             uses: actions/upload-artifact@v3
             with:
-              name: MyArtifact
-              path: build/app/outputs/myArtifact
+              name: dist-files
+              path: dist
           - name: show files
             run: ls ${{ github.workspace}}
       
