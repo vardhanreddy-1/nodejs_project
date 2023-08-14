@@ -31,5 +31,5 @@ jobs:
             with:
                   name: myArtifact
                   path: | 
-                    ${{ github.workdpace }} /build/app/outputs/myArtifact
+                    ${{ github.workdpace }} build/app/outputs/myArtifact
       
