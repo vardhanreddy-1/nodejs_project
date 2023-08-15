@@ -1,0 +1,51 @@
+name: Download_Artifact
+
+on: 
+    push:
+        branches:
+            - main
+jobs:
+    TestJob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get the Code
+              uses: actions/checkout@v3
+            - name: Set The Env
+              uses: actions/setup-node@v3
+              with:
+                     node-version: 17
+            - name: Install Dependencies
+              run:  npm ci  
+            - name: Lint code
+              run: npm run lint
+            - name: Testing the code
+              run: npm run test
+    
+    BuildJob:
+        needs: [TestJob]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get the code
+              uses: actions/checkout@v3
+            - name: Set the Env
+              uses: actions/setup-node@v3
+              with:
+                    node-version: 17
+            - name: Install Dependencies
+              uses: npm ci
+            - name: Build the code
+              run:  npm run build
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v3
+              with:
+                    name: my-Dist-files
+                    path: dist
+    
+    Download-Artifact:
+        needs: [BuildJob]  
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download Artifact
+              uses: actions/download-artifact@v3
+              with:
+                     name: my-Dist-files
