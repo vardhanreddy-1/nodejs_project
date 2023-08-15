@@ -24,6 +24,9 @@ jobs:
     BuildJob:
         needs: [TestJob]
         runs-on: ubuntu-latest
+        outputs:
+             scriptoutputfile: ${{ steps.publish.outputs.JSoutputfiles }}
+            
         steps:
             - name: Get the code
               uses: actions/checkout@v3
@@ -35,6 +38,10 @@ jobs:
               run: npm ci
             - name: Build the code
               run:  npm run build
+            - name: Using output files
+              id: publish
+              run: find dist/assets/*.js -type f -execdir echo ' ::set-output name={JSoutputfiles}:{}' ';'
+
             - name: Upload Artifact
               uses: actions/upload-artifact@v3
               with:
@@ -49,3 +56,7 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                      name: my-Dist-files
+            - name: using output file
+              run: echo "${{ needs.BuildJob.outputs.scriptoutputfile }}"
+            - name: List the files
+              run:  ls ${{ github.workspace }} 
