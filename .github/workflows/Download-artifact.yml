@@ -32,7 +32,7 @@ jobs:
               with:
                     node-version: 17
             - name: Install Dependencies
-              uses: npm ci
+              run: npm ci
             - name: Build the code
               run:  npm run build
             - name: Upload Artifact
