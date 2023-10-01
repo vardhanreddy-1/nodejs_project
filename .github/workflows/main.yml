@@ -13,7 +13,7 @@ jobs:
       buildjob:
         strategy:
             matrix:
-                node-version: [12.x, 14.x,16.x, 17.x, 18.x]
+                node-version: [ 17.x]
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
