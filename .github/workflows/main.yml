@@ -1,0 +1,40 @@
+name: nodejs project
+on:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        types: [opened,reopened]
+        branches:
+             - main
+             - dev
+jobs:
+      buildjob:
+        strategy:
+            matrix:
+                node-version: [12.x, 14.x,16.x, 17.x, 18.x]
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: setup the env ${{ matrix.node-version}}
+              uses: actions/setup-node@v3
+              with:
+                    node-version: ${{ matrix.node-version}}
+            - name: cache the dependencies
+              env:
+                cache-name: cache-node-modules
+              uses: actions/cache@v3
+              with:
+                    path: ~/.npm
+                    key: ${{runner.os}}-build-${{env.cache-name}}-${{hashFiles('**/package-lock.json')}}
+                    restore-keys: |
+                            ${{runner.os}}-build-${{env.cache-name}}-
+                            ${{runner.os}}-build-
+                            ${{runner.os}}-
+            - name: Install Dependencies
+              run: npm ci
+            - name: Test
+              run: npm test
+      
