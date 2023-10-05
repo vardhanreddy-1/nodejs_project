@@ -11,17 +11,17 @@ on:
              - dev
 jobs:
       buildjob:
-        strategy:
-            matrix:
-                node-version: [ 17.x]
+        #strategy:
+            #matrix:
+                #node-version: [ 17.x]
         runs-on: ubuntu-latest
         steps:
             - name: checkout code
               uses: actions/checkout@v3
-            - name: setup the env ${{ matrix.node-version}}
+            - name: setup the env 
               uses: actions/setup-node@v3
               with:
-                    node-version: ${{ matrix.node-version}}
+                    node-version: 17
             - name: cache the dependencies
               env:
                 cache-name: cache-node-modules
