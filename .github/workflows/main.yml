@@ -43,7 +43,7 @@ jobs:
                     login-server: ${{secrets.ACR_SERVER }}
                     username: ${{secrets.ACR_USER_NAME}}
                     password: ${{secrets.ACR_PASSWORD}}
-            - name: building and pushing into ACR
+            - name: build image and pushing into ACR
               run: |
                     docker build -t ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}} . 
                     docker push  ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}}    
