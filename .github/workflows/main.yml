@@ -45,5 +45,5 @@ jobs:
                     password: ${{secrets.ACR_PASSWORD}}
             - name: building and pushing into ACR
               run: |
-                    docker build -t ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}}
+                    docker build -t ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}} . 
                     docker push  ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}}    
