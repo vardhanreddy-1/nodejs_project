@@ -46,4 +46,5 @@ jobs:
             - name: build image and pushing into ACR
               run: |
                     docker build -t ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}} . 
-                    docker push  ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}}    
+                    docker push  ${{secrets.ACR_SERVER}}/npm-image:${{github.sha}}  
+                    docker image ls   
